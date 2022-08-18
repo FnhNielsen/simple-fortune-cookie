@@ -39,7 +39,7 @@ jobs:
           name: code
           path: .
       - name: build-step
-        run: go build -o /backend && go build -o /frontend
+        run: chmod +x ci/build_application.sh && ci/build_application.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
