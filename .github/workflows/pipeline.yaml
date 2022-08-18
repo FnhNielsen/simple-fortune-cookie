@@ -59,3 +59,5 @@ jobs:
           run: chmod +x ci/docker_build.sh && ci/docker_build.sh
         - name: push docker
           run: chmod +x ci/docker_push.sh && ci/docker_push.sh
+        - name: push frontend
+          run: chmod +x ci/docker_frontend_push.sh && ci/docker_frontend_push.sh
