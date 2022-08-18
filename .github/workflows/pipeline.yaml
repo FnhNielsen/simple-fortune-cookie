@@ -1,8 +1,25 @@
 name: pipeline
 on: push
 jobs:
-  pipeline-test:
+  Clone-down:
     runs-on: ubuntu-latest
     steps:
-      - name: self-hosted
-        run: echo "Hello World!"
+      - name: checkout-step
+        uses: actions/checkout@v2
+      - name: Upload Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+
+  Test:
+    runs-on: ubuntu-latest
+    needs: Clone-down
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: test-step
+        run: go test
