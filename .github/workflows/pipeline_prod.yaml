@@ -71,4 +71,4 @@ jobs:
             name: code
             path: .
         - name: build kubernetes
-          run: chmod +x ci/kube.sh && ci/kube.sh
+          run: kubectl apply -f kubernetes/
