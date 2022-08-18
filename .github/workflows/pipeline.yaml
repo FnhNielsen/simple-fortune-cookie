@@ -7,7 +7,7 @@ jobs:
       - name: checkout-step
         uses: actions/checkout@v3
       - name: Upload Repo
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: code
           path: .
@@ -17,7 +17,7 @@ jobs:
     needs: Clone-down
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: code
           path: .
