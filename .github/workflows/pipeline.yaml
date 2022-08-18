@@ -1,63 +1,63 @@
-env:
-  docker_username: ${{ secrets.DOCKER_USERNAME }}
-  docker_password: ${{ secrets.DOCKER_PASSWORD }}
-  GIT_COMMIT: ${{ github.sha }}
+# env:
+#   docker_username: ${{ secrets.DOCKER_USERNAME }}
+#   docker_password: ${{ secrets.DOCKER_PASSWORD }}
+#   GIT_COMMIT: ${{ github.sha }}
 
-name: pipeline
-on: push
-jobs:
-  Clone-down:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout-step
-        uses: actions/checkout@v3
-      - name: Upload Repo
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
+# name: pipeline
+# on: push
+# jobs:
+#   Clone-down:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout-step
+#         uses: actions/checkout@v3
+#       - name: Upload Repo
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: code
+#           path: .
 
-  Test:
-    runs-on: ubuntu-latest
-    needs: Clone-down
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: test-step
-        run: cd backend && go test -v
+#   Test:
+#     runs-on: ubuntu-latest
+#     needs: Clone-down
+#     steps:
+#       - name: Download artifact
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: code
+#           path: .
+#       - name: test-step
+#         run: cd backend && go test -v
   
-  Build:
-    runs-on: ubuntu-latest
-    needs: Clone-down
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: code
-          path: .
-      - name: build-step
-        run: chmod +x ci/build_application.sh && ci/build_application.sh
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
+#   Build:
+#     runs-on: ubuntu-latest
+#     needs: Clone-down
+#     steps:
+#       - name: Download artifact
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: code
+#           path: .
+#       - name: build-step
+#         run: chmod +x ci/build_application.sh && ci/build_application.sh
+#       - name: Upload artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: code
+#           path: .
 
-  Docker-Image:
-      runs-on: ubuntu-latest
-      needs: [Build, Test]
-      steps:
-        - name: Download build
-          uses: actions/download-artifact@v2
-          with:
-            name: code
-            path: .
-        - name: build docker
-          run: chmod +x ci/docker_build.sh && ci/docker_build.sh
-        - name: push docker
-          run: chmod +x ci/docker_push.sh && ci/docker_push.sh
-        - name: push frontend
-          run: chmod +x ci/docker_frontend_push.sh && ci/docker_frontend_push.sh
+#   Docker-Image:
+#       runs-on: ubuntu-latest
+#       needs: [Build, Test]
+#       steps:
+#         - name: Download build
+#           uses: actions/download-artifact@v2
+#           with:
+#             name: code
+#             path: .
+#         - name: build docker
+#           run: chmod +x ci/docker_build.sh && ci/docker_build.sh
+#         - name: push docker
+#           run: chmod +x ci/docker_push.sh && ci/docker_push.sh
+#         - name: push frontend
+#           run: chmod +x ci/docker_frontend_push.sh && ci/docker_frontend_push.sh
