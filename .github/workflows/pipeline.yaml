@@ -13,7 +13,7 @@ jobs:
           path: .
 
   Test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Clone-down
     steps:
       - name: Download artifact
