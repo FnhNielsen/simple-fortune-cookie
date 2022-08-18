@@ -62,7 +62,7 @@ jobs:
         - name: push frontend
           run: chmod +x ci/docker_frontend_push.sh && ci/docker_frontend_push.sh
   Deploy:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       needs: [Build, Test, Docker-Image]
       steps:
         - name: Download build
