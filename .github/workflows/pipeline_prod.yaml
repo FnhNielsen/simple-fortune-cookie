@@ -4,7 +4,12 @@ env:
   GIT_COMMIT: ${{ github.sha }}
 
 name: pipeline_prod
-on: push
+on:
+  # Trigger the workflow on pull request,
+  # but only for the main branch
+  pull_request:
+    branches:
+      - main
 jobs:
   Clone-down:
     runs-on: ubuntu-latest
@@ -62,7 +67,7 @@ jobs:
         - name: push frontend
           run: chmod +x ci/docker_frontend_push.sh && ci/docker_frontend_push.sh
   Deploy:
-      runs-on: self-hosted
+      runs-on: [self-hosted, ubuntu-latest]
       needs: [Build, Test, Docker-Image]
       steps:
         - name: Download build
