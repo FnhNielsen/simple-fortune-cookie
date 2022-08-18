@@ -22,4 +22,4 @@ jobs:
           name: code
           path: .
       - name: test-step
-        run: go test
+        run: cd test && go test -v
