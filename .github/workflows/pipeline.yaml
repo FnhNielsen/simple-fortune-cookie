@@ -2,7 +2,7 @@ name: pipeline
 on: push
 jobs:
   Clone-down:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: checkout-step
         uses: actions/checkout@v2
@@ -13,7 +13,7 @@ jobs:
           path: .
 
   Test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Clone-down
     steps:
       - name: Download artifact
