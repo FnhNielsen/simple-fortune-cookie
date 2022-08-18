@@ -5,9 +5,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: checkout-step
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Upload Repo
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: code
           path: .
@@ -17,7 +17,7 @@ jobs:
     needs: Clone-down
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: code
           path: .
