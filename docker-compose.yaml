@@ -9,7 +9,7 @@ services:
       BACKEND_DNS: backend
       BACKEND_PORT: 9000
     ports:
-      - 8085:8080
+      - 8080:8080
     depends_on:
       - backend
 
@@ -25,7 +25,6 @@ services:
 
   redis:
     container_name: redis
-    command: redis-server --appendonly yes
     image: redis:latest
     expose: 
       - 6379
