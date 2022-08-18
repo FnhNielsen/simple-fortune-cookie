@@ -1,1 +1,8 @@
-#ci
+name: pipeline
+on: push
+jobs:
+  pipeline-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: self-hosted
+        run: echo "Hello World!"
