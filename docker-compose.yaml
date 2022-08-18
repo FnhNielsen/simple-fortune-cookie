@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   frontend_container:
     image: frontend
     ports:
@@ -14,8 +13,5 @@ services:
     depends_on:
       - mysql_container
   
-  mysql_container:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpressdb
+  redis:
+    image: redis:latest
