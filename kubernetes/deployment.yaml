@@ -18,9 +18,13 @@ spec:
         containers:
         - name: redis
           image: redis:latest
-          volumeMounts:
-          - name: data
-            mountPath: ./redis-volume:/data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
 
 ---
 
@@ -37,8 +41,6 @@ spec:
     targetPort: 6379
   selector:
     app: redis
-  type: ClusterIP
-
 ---
 apiVersion: apps/v1
 kind: Deployment
